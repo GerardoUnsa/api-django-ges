@@ -334,3 +334,40 @@ def getPublicationUser(request, pk): # GET
                 content_type='application/json'
                 )
 
+#-----------------------#
+### REPORTES CRUD ###
+#-----------------------#
+
+@csrf_exempt
+def postReportDetail(request):
+    if request.method == "POST":
+    # ------------------------ #
+        publication, razon_r, estado_r = request.POST['publicacionid'], request.POST['razon'], request.POST['estado']
+
+        if request.user.is_authenticated:
+
+            publication = Publication.objects.get(id=publication)
+            Reportes.objects.create(
+                    user = request.user,
+                    publicacion = publication,
+                    razon = razon_r,
+                    estado = estado_r
+                    )
+
+            return HttpResponse(
+                    json.dumps({'message':'/POST/REPORT/REGISTER 200'}, indent=3),
+                    content_type='application/json'
+                    )
+
+        else:
+            return HttpResponse(
+                    json.dumps({'message':'/POST/REPORT/REGISTER 404 NO USER AUTHENTICATED'}, indent=3),
+                    content_type='application/json'
+                    )
+
+    # ------------------------ #
+    else:
+        return HttpResponse(
+                    json.dumps({'message':'/POST/REPORT/REGISTER INCORRECT REQUEST METHOD'}, indent=3),
+                    content_type='application/json'
+                    )

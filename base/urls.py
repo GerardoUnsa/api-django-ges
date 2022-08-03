@@ -13,4 +13,6 @@ urlpatterns = [
         path('publication/put/<str:pk>', views.putPublicationDetail, name="putPublicationDetail"), # PUT
         path('publication/delete/<str:pk>', views.delPublicationDetail, name="delPublicationDetail"), # DELETE
         path('publication/user/<str:pk>', views.getPublicationUser, name="getPublicationUser"), # GET
+
+        path('report/register/', views.postReportDetail, name="postReportDetail"), # POST
         ]

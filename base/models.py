@@ -27,5 +27,6 @@ class UserData(models.Model):
 
 class Reportes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
-    
+    publicacion = models.ForeignKey(Publication, on_delete=models.CASCADE)
+    razon = models.TextField(max_length=200)
+    estado = models.CharField(max_length=20)
